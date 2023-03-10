@@ -12,10 +12,10 @@ import CoreLocation
 
 class NaverMapView: UIView {
         
-    var lat: CLLocationDegrees? = nil
-    var lng: CLLocationDegrees? = nil
+    var lat: Double?
+    var lng: Double?
     
-    lazy var naverMapView: NMFNaverMapView = {
+    let naverMapView: NMFNaverMapView = {
        let naverMapView = NMFNaverMapView()
         naverMapView.showLocationButton = true
         naverMapView.mapView.isIndoorMapEnabled = true
@@ -23,37 +23,42 @@ class NaverMapView: UIView {
         naverMapView.mapView.isRotateGestureEnabled = false
         naverMapView.mapView.isExclusiveTouch = true
         naverMapView.mapView.positionMode = .normal
-        naverMapView.mapView.latitude = lat ?? 0
-        naverMapView.mapView.longitude = lng ?? 0
-        
+
+
+
+//        탭바에서 위도: 37.49966512875614
+//        탭바에서 경도: 126.73591032365364
+
         return naverMapView
     }()
     
     let plustButton: UIButton = {
        let button = UIButton()
         button.setTitle("추가하기", for: .normal)
-        
+    
         return button
     }()
     
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
         
+        super.init(frame: frame)
+
         addSubViewList()
         setUIConstraints()
+
         
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+
     
     func addSubViewList() {
-        [naverMapView,
-         plustButton
-        ].forEach {
+        [naverMapView, plustButton].forEach {
             self.addSubview($0)
         }
     }
@@ -68,6 +73,7 @@ class NaverMapView: UIView {
         plustButton.snp.makeConstraints {
             $0.width.height.equalTo(100)
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(-40)
+            
            
         }
     }
