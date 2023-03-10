@@ -6,23 +6,29 @@
 //
 
 import UIKit
+import CoreLocation
 
 class TabBarController: UITabBarController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.tabBar.barTintColor = UIColor(rgb: 0xCCD5AE)
+
+        
+        //        self.tabBar.barTintColor = UIColor(rgb: 0xCCD5AE)
         self.tabBar.tintColor = .systemBlue
         self.tabBar.backgroundColor = .clear
         self.tabBar.isTranslucent = false
         
-        
+
         let firstVC = UINavigationController(rootViewController: NaverMapViewController())
-//        firstVC.tabBarItem.selectedImage = UIImage(systemName: "pencil")
+        
         firstVC.view.backgroundColor = .white
         firstVC.tabBarItem.title = "지도"
+        
         firstVC.tabBarItem.image = UIImage(systemName: "map")
+        
         
         let secondVC =  UINavigationController(rootViewController: PlaceListViewController())
         secondVC.view.backgroundColor = .white
@@ -32,5 +38,5 @@ class TabBarController: UITabBarController {
         viewControllers = [firstVC, secondVC]
         
     }
-
+    
 }

@@ -18,7 +18,6 @@
 		CC4144F129B87218000B56B2 /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4144F029B87218000B56B2 /* PlaceListViewController.swift */; };
 		CC4144F429B87343000B56B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC4144F329B87343000B56B2 /* SnapKit */; };
 		CC4144F629B8755C000B56B2 /* NaverMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4144F529B8755C000B56B2 /* NaverMapView.swift */; };
-		CC4144FA29BA19BC000B56B2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4144F929BA19BC000B56B2 /* LocationManager.swift */; };
 		CC4144FC29BA1ABC000B56B2 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4144FB29BA1ABC000B56B2 /* LocationModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +36,6 @@
 		CC4144EE29B871C9000B56B2 /* NaverMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapViewController.swift; sourceTree = "<group>"; };
 		CC4144F029B87218000B56B2 /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
 		CC4144F529B8755C000B56B2 /* NaverMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapView.swift; sourceTree = "<group>"; };
-		CC4144F929BA19BC000B56B2 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		CC4144FB29BA1ABC000B56B2 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +73,6 @@
 		CC4144D229B86ADD000B56B2 /* FavoritePlace */ = {
 			isa = PBXGroup;
 			children = (
-				CC4144F829BA19B0000B56B2 /* Manager */,
 				CC4144EB29B87184000B56B2 /* TabBarControllers */,
 				CC4144EA29B87144000B56B2 /* Views */,
 				CC4144E929B87133000B56B2 /* ViewControllers */,
@@ -129,14 +126,6 @@
 				CC4144EE29B871C9000B56B2 /* NaverMapViewController.swift */,
 			);
 			path = NaverMap;
-			sourceTree = "<group>";
-		};
-		CC4144F829BA19B0000B56B2 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				CC4144F929BA19BC000B56B2 /* LocationManager.swift */,
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		D174AC4DE75C065C08389A71 /* Pods */ = {
@@ -281,7 +270,6 @@
 				CC4144D829B86ADD000B56B2 /* ViewController.swift in Sources */,
 				CC4144ED29B87194000B56B2 /* TabBarController.swift in Sources */,
 				CC4144FC29BA1ABC000B56B2 /* LocationModel.swift in Sources */,
-				CC4144FA29BA19BC000B56B2 /* LocationManager.swift in Sources */,
 				CC4144F629B8755C000B56B2 /* NaverMapView.swift in Sources */,
 				CC4144D429B86ADD000B56B2 /* AppDelegate.swift in Sources */,
 				CC4144D629B86ADD000B56B2 /* SceneDelegate.swift in Sources */,
