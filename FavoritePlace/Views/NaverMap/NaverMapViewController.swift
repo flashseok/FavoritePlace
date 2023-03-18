@@ -16,6 +16,8 @@ class NaverMapViewController: UIViewController {
     let naverMapView = NaverMapView()
     let locationManager = CLLocationManager()
     
+    let networkManager = NetworkingManager()
+    
     let textField: UITextField = {
         let tf = UITextField()
         tf.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width / 0.6, height: 40)
@@ -53,7 +55,6 @@ class NaverMapViewController: UIViewController {
         
         setUpNavigationBarItem()
         
-        
     }
     
     func setUpNavigationBarItem() {
@@ -63,6 +64,12 @@ class NaverMapViewController: UIViewController {
     
     @objc func tappedSearchButton() {
         print(#function)
+        
+        guard let text = textField.text else { return }
+        networkManager.fetchRestaurant(query: text) { result in
+            print("여기까지오냐..?")
+            dump(result)
+        }
     }
     
 }

@@ -19,6 +19,12 @@
 		CC4144F429B87343000B56B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC4144F329B87343000B56B2 /* SnapKit */; };
 		CC4144F629B8755C000B56B2 /* NaverMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4144F529B8755C000B56B2 /* NaverMapView.swift */; };
 		CC4144FC29BA1ABC000B56B2 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4144FB29BA1ABC000B56B2 /* LocationModel.swift */; };
+		CCFC2B1E29C6352B00655158 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B1D29C6352B00655158 /* ApiKey.swift */; };
+		CCFC2B2029C6357B00655158 /* Authorizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B1F29C6357B00655158 /* Authorizations.swift */; };
+		CCFC2B2229C635B000655158 /* RequestURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B2129C635B000655158 /* RequestURL.swift */; };
+		CCFC2B2429C6361900655158 /* RestaurantList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B2329C6361900655158 /* RestaurantList.swift */; };
+		CCFC2B2629C636D100655158 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B2529C636D100655158 /* NetworkError.swift */; };
+		CCFC2B2929C6375E00655158 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B2829C6375E00655158 /* NetworkingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +43,12 @@
 		CC4144F029B87218000B56B2 /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
 		CC4144F529B8755C000B56B2 /* NaverMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapView.swift; sourceTree = "<group>"; };
 		CC4144FB29BA1ABC000B56B2 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		CCFC2B1D29C6352B00655158 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
+		CCFC2B1F29C6357B00655158 /* Authorizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorizations.swift; sourceTree = "<group>"; };
+		CCFC2B2129C635B000655158 /* RequestURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestURL.swift; sourceTree = "<group>"; };
+		CCFC2B2329C6361900655158 /* RestaurantList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantList.swift; sourceTree = "<group>"; };
+		CCFC2B2529C636D100655158 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		CCFC2B2829C6375E00655158 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +85,8 @@
 		CC4144D229B86ADD000B56B2 /* FavoritePlace */ = {
 			isa = PBXGroup;
 			children = (
+				CCFC2B2729C6373D00655158 /* Networking */,
+				CCFC2B1C29C6351B00655158 /* Enums */,
 				CC4144EB29B87184000B56B2 /* TabBarControllers */,
 				CC4144EA29B87144000B56B2 /* Views */,
 				CC4144E929B87133000B56B2 /* ViewControllers */,
@@ -91,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				CC4144FB29BA1ABC000B56B2 /* LocationModel.swift */,
+				CCFC2B2329C6361900655158 /* RestaurantList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -126,6 +141,25 @@
 				CC4144EE29B871C9000B56B2 /* NaverMapViewController.swift */,
 			);
 			path = NaverMap;
+			sourceTree = "<group>";
+		};
+		CCFC2B1C29C6351B00655158 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CCFC2B1D29C6352B00655158 /* ApiKey.swift */,
+				CCFC2B1F29C6357B00655158 /* Authorizations.swift */,
+				CCFC2B2129C635B000655158 /* RequestURL.swift */,
+				CCFC2B2529C636D100655158 /* NetworkError.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		CCFC2B2729C6373D00655158 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				CCFC2B2829C6375E00655158 /* NetworkingManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		D174AC4DE75C065C08389A71 /* Pods */ = {
@@ -265,14 +299,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCFC2B2429C6361900655158 /* RestaurantList.swift in Sources */,
 				CC4144F129B87218000B56B2 /* PlaceListViewController.swift in Sources */,
+				CCFC2B2229C635B000655158 /* RequestURL.swift in Sources */,
 				CC4144EF29B871C9000B56B2 /* NaverMapViewController.swift in Sources */,
 				CC4144D829B86ADD000B56B2 /* ViewController.swift in Sources */,
 				CC4144ED29B87194000B56B2 /* TabBarController.swift in Sources */,
 				CC4144FC29BA1ABC000B56B2 /* LocationModel.swift in Sources */,
 				CC4144F629B8755C000B56B2 /* NaverMapView.swift in Sources */,
 				CC4144D429B86ADD000B56B2 /* AppDelegate.swift in Sources */,
+				CCFC2B1E29C6352B00655158 /* ApiKey.swift in Sources */,
+				CCFC2B2629C636D100655158 /* NetworkError.swift in Sources */,
 				CC4144D629B86ADD000B56B2 /* SceneDelegate.swift in Sources */,
+				CCFC2B2029C6357B00655158 /* Authorizations.swift in Sources */,
+				CCFC2B2929C6375E00655158 /* NetworkingManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

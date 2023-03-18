@@ -8,5 +8,7 @@ target 'FavoritePlace' do
   # Pods for FavoritePlace
 
 pod 'NMapsMap'
+pod 'SwiftyJSON', '~> 4.0'
+pod 'Alamofire'
 
 end
