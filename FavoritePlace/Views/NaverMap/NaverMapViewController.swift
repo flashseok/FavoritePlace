@@ -17,7 +17,9 @@ class NaverMapViewController: UIViewController {
     let locationManager = CLLocationManager()
     
     let networkManager = NetworkingManager()
-    
+    lazy var placeList: PlaceList? = nil
+    var markers: [NMFMarker] = []
+        
     let textField: UITextField = {
         let tf = UITextField()
         tf.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width / 0.6, height: 40)
@@ -27,7 +29,7 @@ class NaverMapViewController: UIViewController {
         tf.autocorrectionType = .no
         tf.autocapitalizationType = .none
         tf.spellCheckingType = .no
-        tf.keyboardType = .URL
+        tf.keyboardType = .default
         tf.keyboardAppearance = .dark
         tf.layer.borderWidth = 0.3
         tf.layer.cornerRadius = 10 // 모서리 둥글게
@@ -49,8 +51,6 @@ class NaverMapViewController: UIViewController {
         self.locationManager.requestWhenInUseAuthorization()
         
         userLocationSetUp()
-        markUpPlace()
-        
         textField.delegate = self
         
         setUpNavigationBarItem()
@@ -69,6 +69,22 @@ class NaverMapViewController: UIViewController {
         networkManager.fetchRestaurant(query: text) { result in
             print("여기까지오냐..?")
             dump(result)
+            switch result {
+            case .success(let placeListData):
+                self.placeList = placeListData
+                
+                DispatchQueue.main.async {
+                    self.removeMarker()
+                    self.markers = []
+                    
+                    self.setMarker(place: self.placeList)
+                    print("마커 갯수 : \(self.placeList?.documents.count)")
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            
         }
     }
     
@@ -143,6 +159,32 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
         // 탭한 곳의 위도,경도
         print("\(latlng.lat), \(latlng.lng)")
         textField.resignFirstResponder() // TextField 비활성화
+    }
+    
+    func setMarker(place: PlaceList?) {
+        
+        self.placeList?.documents.forEach {
+            
+            guard let x = Double($0.x),
+                  let y = Double($0.y) else { return }
+            
+            let marker = NMFMarker()
+            marker.position = NMGLatLng(lat: y, lng: x)
+            
+            markers.append(marker)
+            
+            markers.forEach {
+                $0.mapView = naverMapView.naverMapView.mapView
+            }
+        }
+    }
+    
+    func removeMarker() {
+        
+        markers.forEach {
+            $0.mapView = nil
+        }
+
     }
 
         

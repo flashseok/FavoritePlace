@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Welcome
-struct RestaurantList: Codable {
+struct PlaceList: Codable {
     let documents: [Document]
     let meta: Meta
 }

@@ -15,7 +15,7 @@ final class NetworkingManager {
 //
 //    private init() { }
 //
-    typealias ParsingRestaurantListCompletion = (Result<RestaurantList, NetworkError>) -> Void
+    typealias ParsingRestaurantListCompletion = (Result<PlaceList, NetworkError>) -> Void
     
     
     func fetchRestaurant(query: String, completionHandler: @escaping ParsingRestaurantListCompletion) {
@@ -46,7 +46,7 @@ final class NetworkingManager {
                    encoding: URLEncoding.default,
                    headers: header)
         .validate(statusCode: 200..<500)
-        .responseDecodable(of: RestaurantList.self) { response in
+        .responseDecodable(of: PlaceList.self) { response in
             
             switch response.result {
             case .success(let restaurantList):
