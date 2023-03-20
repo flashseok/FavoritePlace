@@ -32,12 +32,7 @@ class NaverMapView: UIView {
         return naverMapView
     }()
     
-    let plustButton: UIButton = {
-       let button = UIButton()
-        button.setTitle("추가하기", for: .normal)
-    
-        return button
-    }()
+
     
     
     override init(frame: CGRect) {
@@ -58,7 +53,7 @@ class NaverMapView: UIView {
 
     
     func addSubViewList() {
-        [naverMapView, plustButton].forEach {
+        [naverMapView].forEach {
             self.addSubview($0)
         }
     }
@@ -70,12 +65,7 @@ class NaverMapView: UIView {
             $0.top.equalToSuperview()
         }
         
-        plustButton.snp.makeConstraints {
-            $0.width.height.equalTo(100)
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(-40)
-            
-           
-        }
+
     }
     
     

@@ -170,11 +170,34 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
             
             let marker = NMFMarker()
             marker.position = NMGLatLng(lat: y, lng: x)
+            marker.captionText = $0.placeName
+            
+            marker.isHideCollidedCaptions = true // 마커와 겹치는 다른 마커의 캡션을 자동으로 숨김.
+            marker.captionOffset = 2
+//            marker.isHideCollidedSymbols = true // 마커가 지도 심볼과 겹치는 경우 심벌을 숨김
+//            marker.isHideCollidedMarkers = true // 다른 심볼의 마커와 겹치는 경우 숨김. (z인덱스가 큰마커를 우선) ** marker.zIndex = 100 (인덱스 설정 예시) **
+            marker.touchHandler = {(overlay) in
+                if let marker1 = overlay as? NMFMarker {
+                    print("marker1")
+                    print(marker1.captionText)
+                    print(marker1.position)
+                    
+                    
+                    
+                    let selectedPlaceView = SelectedPlaceViewController()
+                    
+                    self.present(selectedPlaceView, animated: true)
+                    
+                }
+                return true
+            }
+
             
             markers.append(marker)
             
             markers.forEach {
                 $0.mapView = naverMapView.naverMapView.mapView
+
             }
         }
     }
@@ -200,6 +223,10 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
             return false
         }
     }
+    
+
+    
+    
     
 }
 
