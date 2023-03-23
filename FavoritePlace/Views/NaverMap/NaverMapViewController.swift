@@ -19,6 +19,7 @@ class NaverMapViewController: UIViewController {
     let networkManager = NetworkingManager()
     lazy var placeList: PlaceList? = nil
     var markers: [NMFMarker] = []
+    let selectedViewController = SelectedPlaceViewController()
         
     let textField: UITextField = {
         let tf = UITextField()
@@ -38,6 +39,7 @@ class NaverMapViewController: UIViewController {
         
         return tf
     }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +56,42 @@ class NaverMapViewController: UIViewController {
         textField.delegate = self
         
         setUpNavigationBarItem()
+        setEventCall()
         
     }
     
+
     func setUpNavigationBarItem() {
         self.navigationItem.titleView = textField
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(tappedSearchButton))
     }
+    
+    func setEventCall() {
+        naverMapView.cancelButton.addTarget(self, action: #selector(tappedCancelButton), for: .touchUpInside)
+        naverMapView.plusButton.addTarget(self, action: #selector(tappedPlusButton), for: .touchUpInside)
+    }
+    
+    @objc func tappedCancelButton() {
+        naverMapView.popUpView.isHidden = true
+        naverMapView.buttonStackView.isHidden = true
+        naverMapView.imageView.isHidden = true
+        naverMapView.plusButton.isHidden = true
+        naverMapView.cancelButton.isHidden = true
+    }
+    
+    @objc func tappedPlusButton() {
+        print(#function)
+    }
+    
+    
+    @objc func tappedMarker() {
+        naverMapView.popUpView.isHidden = false
+        naverMapView.buttonStackView.isHidden = false
+        naverMapView.imageView.isHidden = false
+        naverMapView.cancelButton.isHidden = false
+        naverMapView.plusButton.isHidden = false
+    }
+    
     
     @objc func tappedSearchButton() {
         print(#function)
@@ -79,6 +110,7 @@ class NaverMapViewController: UIViewController {
                     
                     self.setMarker(place: self.placeList)
                     print("마커 갯수 : \(self.placeList?.documents.count)")
+                    self.moveCameraToFirstIndexPlace()
                 }
                 
             case .failure(let error):
@@ -86,17 +118,17 @@ class NaverMapViewController: UIViewController {
             }
             
         }
+        textField.resignFirstResponder() // TextField 비활성화
+        
     }
     
 }
 
-
+// MARK: - CLLocationManagerDelegate
 extension NaverMapViewController: CLLocationManagerDelegate {
     
     private func userLocationSetUp() {
         locationManager.delegate = self
-        //        locationManager.desiredAccuracy = .
-        
         locationManager.requestWhenInUseAuthorization()
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
@@ -104,8 +136,6 @@ extension NaverMapViewController: CLLocationManagerDelegate {
                 self.locationManager.startUpdatingLocation()
                 print(self.locationManager.location!.coordinate)
                 self.getCurrentUserLocation()
-                
-                
             } else {
                 print("위치 서비스 Off 상태")
             }
@@ -125,6 +155,7 @@ extension NaverMapViewController: CLLocationManagerDelegate {
         
     }
     
+
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //        print("didUpdateLocations")
@@ -143,16 +174,9 @@ extension NaverMapViewController: CLLocationManagerDelegate {
     }
     
     
-    private func markUpPlace() {
-        let marker = NMFMarker()
-        marker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
-        
-        marker.mapView = naverMapView.naverMapView.mapView
-    }
-    
 }
 
-
+// MARK: - NMFMapViewTouchDelegate
 extension NaverMapViewController: NMFMapViewTouchDelegate {
     
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
@@ -160,6 +184,7 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
         print("\(latlng.lat), \(latlng.lng)")
         textField.resignFirstResponder() // TextField 비활성화
     }
+    
     
     func setMarker(place: PlaceList?) {
         
@@ -170,6 +195,12 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
             
             let marker = NMFMarker()
             marker.position = NMGLatLng(lat: y, lng: x)
+            
+            
+//            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: y, lng: x))
+//            cameraUpdate.animation = .fly
+//            cameraUpdate.animationDuration = 3
+            
             marker.captionText = $0.placeName
             
             marker.isHideCollidedCaptions = true // 마커와 겹치는 다른 마커의 캡션을 자동으로 숨김.
@@ -183,11 +214,7 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
                     print(marker1.position)
                     
                     
-                    
-                    let selectedPlaceView = SelectedPlaceViewController()
-                    
-                    self.present(selectedPlaceView, animated: true)
-                    
+                    self.checkMarkerCaption(marker: marker1)
                 }
                 return true
             }
@@ -197,20 +224,46 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
             
             markers.forEach {
                 $0.mapView = naverMapView.naverMapView.mapView
-
             }
         }
     }
     
-    func removeMarker() {
-        
-        markers.forEach {
-            $0.mapView = nil
+    func checkMarkerCaption(marker: NMFMarker) {
+        print(#function)
+        print(marker.captionText)
+        let text = marker.captionText
+        self.placeList?.documents.forEach {
+            if $0.placeName == text {
+                print("맞다")
+                print($0.addressName)
+                tappedMarker()
+                
+            } else {
+                print("아니다")
+            }
         }
-
     }
+    
+    
+    func removeMarker() { markers.forEach { $0.mapView = nil } }
 
+    func moveCameraToFirstIndexPlace() {
         
+        guard let x = self.placeList?.documents[0].x,
+              let y = self.placeList?.documents[0].y else { return }
+        
+        guard let lng = Double(x),
+              let lat = Double(y) else { return }
+        
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
+        cameraUpdate.animation = .easeIn
+        cameraUpdate.animation = .fly
+        cameraUpdate.animationDuration = 3
+        self.naverMapView.naverMapView.mapView.moveCamera(cameraUpdate)
+    }
+    
+    
+    
     func mapView(_ mapView: NMFMapView, didTap symbol: NMFSymbol) -> Bool {
         if symbol.caption == "서울특별시청" {
             print("서울시청 탭")
@@ -224,16 +277,12 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
         }
     }
     
-
-    
-    
-    
 }
 
 
+// MARK: - UITextFieldDelegate
 extension NaverMapViewController: UITextFieldDelegate {
     
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // TextField 비활성화
         tappedSearchButton()

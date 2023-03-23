@@ -151,8 +151,8 @@
 		CC72806F29C896070012E11B /* SelectedPlace */ = {
 			isa = PBXGroup;
 			children = (
-				CC72806C29C895EC0012E11B /* SelectedPlaceViewController.swift */,
 				CC72807029C8961C0012E11B /* SelectedPlaceView.swift */,
+				CC72806C29C895EC0012E11B /* SelectedPlaceViewController.swift */,
 			);
 			path = SelectedPlace;
 			sourceTree = "<group>";

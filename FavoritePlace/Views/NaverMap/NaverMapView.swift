@@ -24,25 +24,71 @@ class NaverMapView: UIView {
         naverMapView.mapView.isExclusiveTouch = true
         naverMapView.mapView.positionMode = .normal
 
-
-
-//        탭바에서 위도: 37.49966512875614
-//        탭바에서 경도: 126.73591032365364
-
         return naverMapView
     }()
     
-
+    let popUpView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 20
+        view.isHidden = true
+        
+        return view
+    }()
     
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .blue
+        imageView.contentMode = .scaleToFill
+        imageView.image = UIImage(named: "YJ")
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 20
+        imageView.isHidden = true
+                
+        return imageView
+    }()
+    
+    let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("돌아가기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .yellow
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        button.isHidden = true
+        
+        return button
+    }()
+    
+    let plusButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("추가하기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .yellow
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        button.isHidden = true
+        
+        return button
+    }()
+    
+    lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [cancelButton, plusButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 20
+        stackView.isHidden = true
+        
+        return stackView
+    }()
     
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
 
         addSubViewList()
         setUIConstraints()
-
-        
     }
     
     
@@ -50,23 +96,62 @@ class NaverMapView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    func showPopUpView() {
+        self.popUpView.isHidden = true
+    }
     
     func addSubViewList() {
-        [naverMapView].forEach {
+        [naverMapView,popUpView,imageView,buttonStackView].forEach {
             self.addSubview($0)
         }
     }
     
     
     func setUIConstraints() {
+        setNaverMapViewConstraints()
+        setPopUpViewConstraints()
+        setImageViewConstraints()
+        setButtonStackViewConstraints()
+    }
+    
+    func setNaverMapViewConstraints() {
         naverMapView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
             $0.top.equalToSuperview()
         }
-        
-
     }
+    
+    
+    func setPopUpViewConstraints() {
+        popUpView.snp.makeConstraints {
+            $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(50)
+            $0.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing).offset(-50)
+            $0.height.equalTo(UIScreen.main.bounds.height / 2.5)
+            $0.centerY.equalTo(self.safeAreaLayoutGuide.snp.centerY)
+        }
+    }
+    
+    func setImageViewConstraints() {
+        imageView.snp.makeConstraints {
+            $0.leading.equalTo(self.popUpView.snp.leading).offset(4)
+            $0.trailing.equalTo(self.popUpView.snp.trailing).offset(-4)
+            $0.top.equalTo(self.popUpView.snp.top).offset(4)
+            $0.bottom.equalTo(self.popUpView.snp.bottom).offset(-30)
+        }
+    }
+    
+    func setButtonStackViewConstraints() {
+        buttonStackView.snp.makeConstraints {
+            $0.top.equalTo(imageView.snp.bottom).offset(2)
+            $0.leading.equalTo(self.popUpView.snp.leading).offset(4)
+            $0.trailing.equalTo(self.popUpView.snp.trailing).offset(4)
+            $0.bottom.equalTo(self.popUpView.snp.bottom).offset(4)
+        }
+    }
+    
+
+    
+    
     
     
 }
