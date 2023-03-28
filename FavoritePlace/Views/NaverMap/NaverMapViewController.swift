@@ -20,6 +20,7 @@ class NaverMapViewController: UIViewController {
     lazy var placeList: PlaceList? = nil
     var markers: [NMFMarker] = []
     let selectedViewController = SelectedPlaceViewController()
+    let createPlaceViewController = CreatePlaceViewController()
         
     let textField: UITextField = {
         let tf = UITextField()
@@ -77,10 +78,12 @@ class NaverMapViewController: UIViewController {
         naverMapView.imageView.isHidden = true
         naverMapView.plusButton.isHidden = true
         naverMapView.cancelButton.isHidden = true
+        naverMapView.userText.isHidden = true
     }
     
     @objc func tappedPlusButton() {
         print(#function)
+        self.navigationController?.pushViewController(createPlaceViewController, animated: true)
     }
     
     
@@ -90,6 +93,7 @@ class NaverMapViewController: UIViewController {
         naverMapView.imageView.isHidden = false
         naverMapView.cancelButton.isHidden = false
         naverMapView.plusButton.isHidden = false
+        naverMapView.userText.isHidden = false
     }
     
     
@@ -104,13 +108,14 @@ class NaverMapViewController: UIViewController {
             case .success(let placeListData):
                 self.placeList = placeListData
                 
-                DispatchQueue.main.async {
-                    self.removeMarker()
-                    self.markers = []
+                DispatchQueue.main.async { [weak self] in
+                    guard let weakSelf = self else { return }
+                    weakSelf.removeMarker()
+                    weakSelf.markers = []
                     
-                    self.setMarker(place: self.placeList)
-                    print("마커 갯수 : \(self.placeList?.documents.count)")
-                    self.moveCameraToFirstIndexPlace()
+                    weakSelf.setMarker(place: weakSelf.placeList)
+                    print("마커 갯수 : \(weakSelf.placeList?.documents.count)")
+                    weakSelf.moveCameraToFirstIndexPlace()
                 }
                 
             case .failure(let error):
@@ -183,6 +188,7 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
         // 탭한 곳의 위도,경도
         print("\(latlng.lat), \(latlng.lng)")
         textField.resignFirstResponder() // TextField 비활성화
+        tappedCancelButton()
     }
     
     
@@ -261,8 +267,7 @@ extension NaverMapViewController: NMFMapViewTouchDelegate {
         cameraUpdate.animationDuration = 3
         self.naverMapView.naverMapView.mapView.moveCamera(cameraUpdate)
     }
-    
-    
+        
     
     func mapView(_ mapView: NMFMapView, didTap symbol: NMFSymbol) -> Bool {
         if symbol.caption == "서울특별시청" {

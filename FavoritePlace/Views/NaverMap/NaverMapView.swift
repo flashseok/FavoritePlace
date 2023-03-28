@@ -44,9 +44,24 @@ class NaverMapView: UIView {
         imageView.image = UIImage(named: "YJ")
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
+        imageView.isUserInteractionEnabled = false
         imageView.isHidden = true
                 
         return imageView
+    }()
+    
+    let userText: UILabel = {
+        let label = UILabel()
+        label.text = "difjdifjdifjdifjdidjidjfidjdfijd"
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.numberOfLines = 0
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 10
+        label.backgroundColor = .white
+        label.isHidden = true
+        
+        return label
     }()
     
     let cancelButton: UIButton = {
@@ -101,7 +116,7 @@ class NaverMapView: UIView {
     }
     
     func addSubViewList() {
-        [naverMapView,popUpView,imageView,buttonStackView].forEach {
+        [naverMapView,popUpView,imageView,userText,buttonStackView].forEach {
             self.addSubview($0)
         }
     }
@@ -111,6 +126,7 @@ class NaverMapView: UIView {
         setNaverMapViewConstraints()
         setPopUpViewConstraints()
         setImageViewConstraints()
+        setUserTextViewConstraints()
         setButtonStackViewConstraints()
     }
     
@@ -126,7 +142,7 @@ class NaverMapView: UIView {
         popUpView.snp.makeConstraints {
             $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(50)
             $0.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing).offset(-50)
-            $0.height.equalTo(UIScreen.main.bounds.height / 2.5)
+            $0.height.equalTo(UIScreen.main.bounds.height / 2)
             $0.centerY.equalTo(self.safeAreaLayoutGuide.snp.centerY)
         }
     }
@@ -135,17 +151,26 @@ class NaverMapView: UIView {
         imageView.snp.makeConstraints {
             $0.leading.equalTo(self.popUpView.snp.leading).offset(4)
             $0.trailing.equalTo(self.popUpView.snp.trailing).offset(-4)
+            $0.height.equalTo(imageView.snp.width)
             $0.top.equalTo(self.popUpView.snp.top).offset(4)
-            $0.bottom.equalTo(self.popUpView.snp.bottom).offset(-30)
+//            $0.bottom.equalTo(self.popUpView.snp.bottom).offset(-30)
+        }
+    }
+    
+    func setUserTextViewConstraints() {
+        userText.snp.makeConstraints {
+            $0.leading.equalTo(self.popUpView.snp.leading).offset(4)
+            $0.trailing.equalTo(self.popUpView.snp.trailing).offset(-4)
+            $0.top.equalTo(self.imageView.snp.bottom).offset(4)
         }
     }
     
     func setButtonStackViewConstraints() {
         buttonStackView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(2)
+            $0.top.equalTo(userText.snp.bottom).offset(2)
             $0.leading.equalTo(self.popUpView.snp.leading).offset(4)
-            $0.trailing.equalTo(self.popUpView.snp.trailing).offset(4)
-            $0.bottom.equalTo(self.popUpView.snp.bottom).offset(4)
+            $0.trailing.equalTo(self.popUpView.snp.trailing).offset(-4)
+            $0.bottom.equalTo(self.popUpView.snp.bottom).offset(-4)
         }
     }
     

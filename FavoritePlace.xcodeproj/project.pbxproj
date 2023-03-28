@@ -21,6 +21,8 @@
 		CC4144FC29BA1ABC000B56B2 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4144FB29BA1ABC000B56B2 /* LocationModel.swift */; };
 		CC72806D29C895EC0012E11B /* SelectedPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72806C29C895EC0012E11B /* SelectedPlaceViewController.swift */; };
 		CC72807129C8961C0012E11B /* SelectedPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72807029C8961C0012E11B /* SelectedPlaceView.swift */; };
+		CC72807429CEB8E50012E11B /* CreatePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72807329CEB8E50012E11B /* CreatePlaceViewController.swift */; };
+		CC72807629CEB8FC0012E11B /* CreatePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72807529CEB8FC0012E11B /* CreatePlaceView.swift */; };
 		CCFC2B1E29C6352B00655158 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B1D29C6352B00655158 /* ApiKey.swift */; };
 		CCFC2B2029C6357B00655158 /* Authorizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B1F29C6357B00655158 /* Authorizations.swift */; };
 		CCFC2B2229C635B000655158 /* RequestURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC2B2129C635B000655158 /* RequestURL.swift */; };
@@ -47,6 +49,8 @@
 		CC4144FB29BA1ABC000B56B2 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		CC72806C29C895EC0012E11B /* SelectedPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPlaceViewController.swift; sourceTree = "<group>"; };
 		CC72807029C8961C0012E11B /* SelectedPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPlaceView.swift; sourceTree = "<group>"; };
+		CC72807329CEB8E50012E11B /* CreatePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceViewController.swift; sourceTree = "<group>"; };
+		CC72807529CEB8FC0012E11B /* CreatePlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceView.swift; sourceTree = "<group>"; };
 		CCFC2B1D29C6352B00655158 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		CCFC2B1F29C6357B00655158 /* Authorizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorizations.swift; sourceTree = "<group>"; };
 		CCFC2B2129C635B000655158 /* RequestURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestURL.swift; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 		CC4144EA29B87144000B56B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CC72807229CEB8CA0012E11B /* CreatePlaceList */,
 				CC72806F29C896070012E11B /* SelectedPlace */,
 				CC4144F729B87874000B56B2 /* NaverMap */,
 			);
@@ -155,6 +160,15 @@
 				CC72806C29C895EC0012E11B /* SelectedPlaceViewController.swift */,
 			);
 			path = SelectedPlace;
+			sourceTree = "<group>";
+		};
+		CC72807229CEB8CA0012E11B /* CreatePlaceList */ = {
+			isa = PBXGroup;
+			children = (
+				CC72807329CEB8E50012E11B /* CreatePlaceViewController.swift */,
+				CC72807529CEB8FC0012E11B /* CreatePlaceView.swift */,
+			);
+			path = CreatePlaceList;
 			sourceTree = "<group>";
 		};
 		CCFC2B1C29C6351B00655158 /* Enums */ = {
@@ -319,6 +333,7 @@
 				CCFC2B2229C635B000655158 /* RequestURL.swift in Sources */,
 				CC4144EF29B871C9000B56B2 /* NaverMapViewController.swift in Sources */,
 				CC4144D829B86ADD000B56B2 /* ViewController.swift in Sources */,
+				CC72807629CEB8FC0012E11B /* CreatePlaceView.swift in Sources */,
 				CC4144ED29B87194000B56B2 /* TabBarController.swift in Sources */,
 				CC4144FC29BA1ABC000B56B2 /* LocationModel.swift in Sources */,
 				CC4144F629B8755C000B56B2 /* NaverMapView.swift in Sources */,
@@ -329,6 +344,7 @@
 				CC4144D629B86ADD000B56B2 /* SceneDelegate.swift in Sources */,
 				CCFC2B2029C6357B00655158 /* Authorizations.swift in Sources */,
 				CCFC2B2929C6375E00655158 /* NetworkingManager.swift in Sources */,
+				CC72807429CEB8E50012E11B /* CreatePlaceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
